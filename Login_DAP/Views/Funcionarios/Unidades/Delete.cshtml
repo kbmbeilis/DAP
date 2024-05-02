@@ -1,0 +1,87 @@
+﻿@model Unidad
+
+@{
+    ViewData["Title"] = "Eliminar unidad";
+}
+
+<h1>Eliminar</h1>
+
+<h3>¿Esta seguro de que desea eliminar esta unidad?</h3>
+<div>
+    <h4>Unidad</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Nombre unidad
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NombreUnidad)
+        </dd>
+        <dt class = "col-sm-2">
+            Correo
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EmailUnidad)
+        </dd>
+        <dt class = "col-sm-2">
+            Telefonos
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Telefonos)
+        </dd>
+        <dt class = "col-sm-2">
+            Domicilio
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Domicilio)
+        </dd>
+        <dt class = "col-sm-2">
+            Colonia
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Colonia)
+        </dd>
+        <dt class = "col-sm-2">
+           Codigo postal
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CodigoPostal)
+        </dd>
+        <dt class = "col-sm-2">
+            Ciudad
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ciudad)
+        </dd>
+        <dt class = "col-sm-2">
+            Entidad
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Entidad)
+        </dd>
+        <dt class = "col-sm-2">
+            Pais
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Pais)
+        </dd>
+        <dt class = "col-sm-2">
+            Estatus
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Estatus)
+        </dd>
+        <dt class = "col-sm-2">
+            Dependencia
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Dependencia.NombreDependencia)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete" asp-controller="Unidades">
+        <input type="hidden" asp-for="IdUnidad" />
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Unidades" asp-controller="Funcionarios">Regresar</a>
+    </form>
+</div>

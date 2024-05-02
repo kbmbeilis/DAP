@@ -1,0 +1,23 @@
+﻿  <!-- using Login_DAP.Models;-->
+@using Login_DAP.Views.Home;
+
+@model IndexModel
+@{
+    ViewData["Title"] = "Te damos la bienvenida";
+
+    var partOfDay = "¡Muy buen día!";
+    if (DateTime.Now.Hour > 12)
+    {
+        partOfDay = "¡Muy buena tarde!";
+    }
+    else if (DateTime.Now.Hour > 18)
+    {
+        partOfDay = "¡Muy buena noche!";
+    }
+}
+
+<div class="text-center">
+    <h1 class="display-4">Te damos la bienvenida al Directorio de Administración Pública de la DGRH</h1>
+    <img src="~/css/images/logo-dap-sonora.png" alt="Imagen de DAP" width="900px" />
+    <p> @partOfDay Hoy es @DateTime.Now.ToString("dddd, dd MMMM yyyy") y son las @DateTime.Now.ToString("HH:mm:ss")</p>
+</div>

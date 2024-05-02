@@ -1,0 +1,80 @@
+﻿@model Login_DAP.Models.Funcionario
+
+@{
+    ViewData["Title"] = "Nuevo";
+}
+<h1 style="color:darkred">Nuevo Funcionario:</h1>
+
+<h4>Funcionario</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" asp-controller="Funcionarios" method="post"  enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NombreFuncionario" class="control-label">Nombre del Funcionario </label>
+                <input asp-for="NombreFuncionario" class="form-control" />
+                <span asp-validation-for="NombreFuncionario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaCargo" class="control-label">Fecha de Cargo</label>
+                <input asp-for="FechaCargo" class="form-control" />
+                <span asp-validation-for="FechaCargo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PuestoOficial" class="control-label">Puesto Oficial</label>
+                <input asp-for="PuestoOficial" class="form-control" />
+                <span asp-validation-for="PuestoOficial" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PuestoFuncional" class="control-label">Puesto Funcional</label>
+                <input asp-for="PuestoFuncional" class="form-control" />
+                <span asp-validation-for="PuestoFuncional" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <strong> <label asp-for="Unidad.Dependencia.NombreDependencia" class="control-label">Nombre de la Dependencia</label></strong>
+                @Html.DropDownListFor(Funcionario => Funcionario.Unidad.Dependencia.IdDependencia, (IEnumerable<SelectListItem>)ViewBag.IdDependencias, new { @class = "form-select dependencia-dropdown" })
+                <span asp-validation-for="Unidad.Dependencia.IdDependencia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <strong><label asp-for="IdUnidad" class="control-label">Unidad a la que esta adscrito</label></strong>
+                @Html.DropDownListFor(Funcionario => Funcionario.IdUnidad, (IEnumerable<SelectListItem>)ViewBag.IdUnidades, new { @class = "form-select unidad-dropdown" })
+                <span asp-validation-for="Unidad.Dependencia.IdDependencia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefono" class="control-label"></label>
+                <input asp-for="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label  class="control-label">Foto</label>
+                <input type="file" asp-for="imagenFile" class="form-control" />
+                <span asp-validation-for="imagenFile" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Estatus" class="control-label"></label>
+                <input asp-for="Estatus" class="form-control" />
+                <span asp-validation-for="Estatus" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="contenedorboton">
+
+                <input id="ButtonForm" type="submit" value="Guardar" class="btn btn-primary" />
+                <a asp-action="Index" asp-controller="Funcionarios" id="ButtonForm" type="submit" class="btn btn-danger">Regresar</a>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+   
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

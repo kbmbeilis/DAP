@@ -1,0 +1,93 @@
+﻿@model List<Funcionario>
+
+@{
+    ViewData["Title"] = "Listado de Funcionarios Públicos";
+}
+
+<h1>Listado de Funcionarios Públicos</h1>
+<h3>Bienvenido al Directorio de los Funcionarios Públicos. </h3>
+<div class="col-4" style="width: 100%">
+    
+    <form asp-action="Buscar" asp-controller="Funcionarios" method="get" style="width:50%">
+        <div class="mb-3">
+            <label for="name">Buscar por nombre del funcionario</label>
+            <input class="form-control" type="text" name="busqueda" asp-route="busqueda"/>
+        </div>
+        <button type="submit" class="btn btn-outline-primary"> Buscar</button>
+        <a asp-action="Index" asp-controller="Funcionarios" class="btn btn-outline-danger">Cancelar</a>
+        <br/>
+        <br/>
+        <a asp-action="CreateView" asp-controller="Funcionarios" class="btn btn-outline-secondary"> Registrar Nuevo Funcionario</a>
+    </form>
+</div>
+
+<table class="table table-hover" style="width:100%" align="center">
+    <colgroup>
+        <col span="1" style="width:5%;">
+        <col span="1" style="width:30%;">
+        <col span="1" style="width:30%;">
+        <col span="1" style="width:25%;">
+        <col span="1" style="width:5%;">
+    </colgroup>
+    <thead>
+        <tr>
+            <th class="not_mapped_style" style="text-align:center">
+                Fotografía</th>
+            <th class="not_mapped_style" style="text-align:center">Nombre del Funcionario</th>
+            <th class="not_mapped_style" style="text-align:center">Dependencia / Unidad Administrativa</th>
+            <th class="not_mapped_style" style="text-align:center">Contacto</th>
+            <th class="not_mapped_style" style="text-align:center">Opciones</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(item.Foto)" alt="Foto" width="90" height="110" />
+            </td>
+            <td>
+                <strong style="font-size:medium; color:darkred ">@Html.DisplayFor(modelItem => item.NombreFuncionario)</strong>
+                <p style="font-size:smaller">
+                    <b style="font-size:small">Puesto Oficial:</b> @item.PuestoOficial<br>
+                    <b>Puesto Funcional:</b> @item.PuestoFuncional<br>
+                </p>
+            </td>
+            <td>
+                <p style="font-size:smaller">
+                    <b style="font-size:small">
+                        Dependencia:
+                   </b> @item.Unidad.Dependencia.NombreDependencia<br>
+                    <b style="font-size:small">
+                        Ud. Administrativa:
+                        </b> @item.Unidad.NombreUnidad<br>
+                    <b style="font-size:small">
+                        Domicilio:
+                        </b> @item.Unidad.Domicilio,
+                        @item.Unidad.Colonia,
+                        C.P. @item.Unidad.CodigoPostal.
+                        @item.Unidad.Ciudad, @item.Unidad.Entidad.
+                        @item.Unidad.Pais <br>
+                </p>
+            </td>
+            <td>
+                <p style="font-size:smaller">
+                    <b style="font-size:small">
+                        Correo electrónico:
+                    </b>
+                        @Html.DisplayFor(modelItem => item.Email)<br>
+                    <b style="font-size:small">Número de Teléfono:</b>
+                        @Html.DisplayFor(modelItem => item.Unidad.Telefonos)<br>
+                </p>
+            </td>
+            
+            
+            <td>
+                    <a class="btn btn-outline-primary btn-sm" asp-action="EditView" asp-controller="Funcionarios" asp-route-id="@item.IdFuncionario">Editar</a>
+                    <a class="btn btn-outline-secondary btn-sm" asp-action="DetailsView" asp-controller="Funcionarios" asp-route-id="@item.IdFuncionario">Detalle</a>
+                    <a class="btn btn-outline-danger btn-sm" asp-action="DeleteView" asp-controller="Funcionarios" asp-route-id="@item.IdFuncionario">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

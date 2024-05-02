@@ -1,0 +1,39 @@
+﻿@model Dependencia
+
+@{
+    ViewData["Title"] = "Editar dependencia";
+}
+<h1 style="color:darkred">Editar dependencia:</h1>
+
+
+<h4>Dependencia</h4>
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" asp-controller="Dependencias">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdDependencia" />
+            <div class="form-group">
+                <label asp-for="NombreDependencia" class="control-label">Nombre de la Dependencia</label>
+                <input asp-for="NombreDependencia" class="form-control" />
+                <span asp-validation-for="NombreDependencia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Estatus" class="control-label">Estatus</label>
+                <select asp-for="Estatus" class="form-control">
+                    <option value="0">ACTIVO</option>
+                    <option value="1">INACTIVO</option>
+                </select>
+                <span asp-validation-for="Estatus" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="contenedorboton">    
+                <input id="ButtonForm"  type="submit" value="Actualizar" class="btn btn-primary" />
+                <a asp-action="Dependencias" asp-controller="Funcionarios" id="ButtonForm" type="submit" class="btn btn-danger">Regresar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

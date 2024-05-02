@@ -1,0 +1,40 @@
+﻿@model List<Dependencia>
+
+@{
+    ViewData["Title"] = "Lista dependencias";
+}
+
+<h1>Lista dependencias</h1>
+<br/>
+<p>
+    <a asp-action="CreateView" asp-controller="Dependencias" class="btn btn-outline-secondary">Agregar nueva dependencia</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nombre dependencia
+            </th>
+            <th>
+                Estatus
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreDependencia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estatus)
+            </td>
+            <td>
+                <a asp-action="EditView" asp-controller="Dependencias" asp-route-id="@item.IdDependencia">Editar</a> |
+                <a asp-action="DeleteView" asp-controller="Dependencias" asp-route-id="@item.IdDependencia">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

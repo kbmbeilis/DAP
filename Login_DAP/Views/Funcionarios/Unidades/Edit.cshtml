@@ -1,0 +1,84 @@
+﻿@model Login_DAP.Models.Unidad
+
+@{
+    ViewData["Title"] = "Editar unidad";
+}
+
+<h1>Editar unidad</h1>
+
+<h4>Unidad</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" asp-controller="Unidades">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdUnidad" />
+            <div class="form-group">
+                <label asp-for="NombreUnidad" class="control-label"></label>
+                <input asp-for="NombreUnidad" class="form-control" />
+                <span asp-validation-for="NombreUnidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmailUnidad" class="control-label"></label>
+                <input asp-for="EmailUnidad" class="form-control" />
+                <span asp-validation-for="EmailUnidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefonos" class="control-label"></label>
+                <input asp-for="Telefonos" class="form-control" />
+                <span asp-validation-for="Telefonos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Domicilio" class="control-label"></label>
+                <input asp-for="Domicilio" class="form-control" />
+                <span asp-validation-for="Domicilio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Colonia" class="control-label"></label>
+                <input asp-for="Colonia" class="form-control" />
+                <span asp-validation-for="Colonia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CodigoPostal" class="control-label"></label>
+                <input asp-for="CodigoPostal" class="form-control" />
+                <span asp-validation-for="CodigoPostal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ciudad" class="control-label"></label>
+                <input asp-for="Ciudad" class="form-control" />
+                <span asp-validation-for="Ciudad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Entidad" class="control-label"></label>
+                <input asp-for="Entidad" class="form-control" />
+                <span asp-validation-for="Entidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pais" class="control-label"></label>
+                <input asp-for="Pais" class="form-control" />
+                <span asp-validation-for="Pais" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Estatus" class="control-label"></label>
+                <input asp-for="Estatus" class="form-control" />
+                <span asp-validation-for="Estatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <strong> <label asp-for="IdDependencia" class="control-label">Nombre de la Dependencia</label></strong>
+                @Html.DropDownListFor(Dependencia => Dependencia.IdDependencia, (IEnumerable<SelectListItem>)ViewBag.IdDependencias, new { @class = "form-select dependencia-dropdown" })
+                <span asp-validation-for="IdDependencia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Dependencias" asp-controller="Funcionarios">Cancelar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

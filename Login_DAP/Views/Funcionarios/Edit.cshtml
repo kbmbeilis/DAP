@@ -1,0 +1,90 @@
+﻿@model Funcionario
+@{
+    ViewData["Title"] = "Editar registro de funcionarios:" ;
+}
+
+<h1 style="color:darkred">Editar Funcionarios:</h1>
+<h4>@Html.DisplayFor(model => model.NombreFuncionario)</h4>
+
+<hr />
+<div class="row">
+        <form asp-action="Edit" asp-controller="Funcionarios" method="post" enctype="multipart/form-data" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdFuncionario" />
+        <div class="col-md-3">
+            <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Foto)" alt="Foto" width="200" height="200" />
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <strong>
+                    <label asp-for="NombreFuncionario" class="control-label">Nombre del Funcionario</label>
+                </strong>
+
+                <input asp-for="NombreFuncionario" class="form-control" />
+                <span asp-validation-for="NombreFuncionario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <strong>
+                    <label asp-for="FechaCargo" class="control-label">Fecha del cargo</label>
+                </strong>
+                <input asp-for="FechaCargo" class="form-control" />
+                <span asp-validation-for="FechaCargo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <strong>
+                    <label asp-for="PuestoOficial" class="control-label">Puesto Oficial</label>
+                </strong>
+                <input asp-for="PuestoOficial" class="form-control" />
+                <span asp-validation-for="PuestoOficial" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <strong><label asp-for="PuestoFuncional" class="control-label">Puesto Funcional</label></strong>
+                <input asp-for="PuestoFuncional" class="form-control" />
+                <span asp-validation-for="PuestoFuncional" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <strong> <label asp-for="Unidad.Dependencia.NombreDependencia" class="control-label">Nombre de la Dependencia</label></strong>
+                @Html.DropDownListFor(Funcionario => Funcionario.Unidad.Dependencia.IdDependencia, (IEnumerable<SelectListItem>)ViewBag.IdDependencias, new { @class = "form-select dependencia-dropdown" })
+                <span asp-validation-for="Unidad.Dependencia.IdDependencia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <strong><label asp-for="IdUnidad" class="control-label">Unidad a la que esta adscrito</label></strong>
+                    @Html.DropDownListFor(Funcionario => Funcionario.IdUnidad, (IEnumerable<SelectListItem>)ViewBag.IdUnidades, new { @class = "form-select unidad-dropdown" })
+                <span asp-validation-for="Unidad.Dependencia.IdDependencia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <strong><label asp-for="Email" class="control-label">Correo electronico</label></strong>
+
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <strong><label asp-for="Telefono" class="control-label">Telfono</label></strong>
+
+                <input asp-for="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <strong> <label asp-for="imagenFile" class="control-label">Fotografia</label></strong>
+
+                <input type="file" asp-for="imagenFile" class="form-control" />
+            </div>
+            <div class="form-group">
+                <strong>
+                    <label asp-for="Estatus" class="control-label">Estatus del funcionario</label>
+                </strong>
+                <select asp-for="Estatus" class="form-control">
+                    <option value="0">ACTIVO</option>
+                    <option value="1">INACTIVO</option>
+                </select>
+                <span asp-validation-for="Estatus" class="text-danger"></span>
+            </div>
+            <div id="contenedorboton">
+                <button id="ButtonForm" type="submit" class="btn btn-success" value="Guardar">Guardar</button>
+                <a asp-action="Index" asp-controller="Funcionarios" id="ButtonForm" type="submit" class="btn btn-danger">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+

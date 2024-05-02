@@ -1,0 +1,94 @@
+﻿@model List<Unidad>
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>Lista unidades</h1>
+<br />
+<p>
+    <a asp-action="CreateView" asp-controller="Unidades" class="btn btn-outline-secondary">Agregar nueva unidad</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nombre unidad
+            </th>
+            <th>
+                Email unidad
+            </th>
+            <th>
+                Telefonos
+            </th>
+            <th>
+                Domicilio
+            </th>
+            <th>
+                Colonia
+            </th>
+            <th>
+                Código postal
+            </th>
+            <th>
+                Ciudad
+            </th>
+            <th>
+                Entidad
+            </th>
+            <th>
+                Pais
+            </th>
+            <th>
+                Estatus
+            </th>
+            <th>
+                Dependencia
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreUnidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailUnidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefonos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Domicilio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Colonia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CodigoPostal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ciudad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Entidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pais)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dependencia.IdDependencia)
+            </td>
+            <td>
+                <a asp-action="EditView" asp-controller="Unidades" asp-route-id="@item.IdUnidad">Editar</a> |
+                <a asp-action="DeleteView" asp-controller="Unidades" asp-route-id="@item.IdUnidad">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

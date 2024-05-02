@@ -1,0 +1,108 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DAP_Login</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!--<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />-->
+    <!--<link rel="stylesheet" href="~/DAP_Login.styles.css" asp-append-version="true" />-->
+    <link rel="stylesheet" href="~/css/lineamientos.css" asp-append-version="true" />
+    <!--<link rel="stylesheet" href="css/lineamientos.css">-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="~/css/Login.css" asp-append-version="true" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+    @RenderSection("script", required: false)
+</head>
+<body id="body">
+    <header>
+        <div class="icon__menu">
+            <i class="fas fa-bars" id="btn_open"></i>
+        </div>
+        <img src="~/css/images/logo-dap-sonora.png" alt="" id="header-imagen" />
+    </header>
+    <div class="menu__side" id="menu_side">
+        <div class="name__page">
+            <i class="fas fa-home" title="Inicio"></i>
+            <h4>DAP</h4>
+        </div>
+        <div class="options__menu">
+            <a asp-action="Index" asp-controller="Home" class="selected">
+                <div class="option">
+                    <i class="fas fa-home" title="Inicio"></i>
+                    <h4>Inicio</h4>
+                </div>
+            </a>
+            <a asp-action="CreateView" asp-controller="Funcionarios">
+                <div class="option">
+                    <i class="fa-solid fa-plus" title="Nuevo"></i>
+                    <h5>Nuevo</h5>
+                </div>
+            </a>
+            <a asp-action="Index" asp-controller="Funcionarios">
+                <div class="option">
+                    <i class="fa-solid fa-user" title="Funcionarios"></i>
+                    <h4>Funcionarios</h4>
+                </div>
+            </a>
+            <a asp-action="Dependencias" asp-controller="Funcionarios">
+                <div class="option">
+                    <i class=" fa-solid fa-people-roof" title="Dependencia"></i>
+                    <h4>Dependencia</h4>
+                </div>
+            </a>
+            <a asp-action="Unidades" asp-controller="Funcionarios">
+                <div class="option">
+                    <i class="fa-solid fa-school" title="Unidades"></i>
+                    <h4>Unidades</h4>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="container">
+        <main>
+            @RenderBody()
+        </main>
+    </div>
+</body>
+    <div>
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                <br />
+                <p>&copy; Todos los derechos reservados @DateTime.Now.ToString("yyyy"). - DAP | Puede consultar aquí nuestro <a href="http://donasangre.saludsonora.gob.mx/politicas-de-uso-y-privacidad.html">Aviso de Privacidad</a></p>
+
+            </div>
+        </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/script.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+    <script>
+        $(document).ready(function () {
+            $(".dependencia-dropdown").change(function () {
+                var selectedDependencia = $(this).val();
+                $.get("@Url.Action("GetUnidades", "Funcionarios")", { IdDependencia: selectedDependencia }, function (data) {
+                    $(".unidad-dropdown").empty();
+                    $.each(data, function (index, item) {
+                        var option = $("<option>")
+                            .text(item.nombreUnidad)
+                            .val(item.idUnidad);
+                        $(".unidad-dropdown").append(option);
+                    });
+                });
+            });
+        });
+    </script>
+</html>
+
+
